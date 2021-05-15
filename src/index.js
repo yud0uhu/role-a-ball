@@ -4,6 +4,26 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//import Unity, { MoveRightButton } from "react-unity-webgl";
+
+//const MoveRightButton = new MoveRightButton({
+    // <button
+    //     type="button"
+    //     onClick={(): void => {
+    //         unityContent.send("Ball", MoveRight, 1);
+    //     }}
+    //   >
+    //     右へ
+    //   </button>
+//     );
+    
+//    const App = () => {
+//      return <Unity unityContext={unityContext} />;
+//    };
+    
+  
+//  export default Header;
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

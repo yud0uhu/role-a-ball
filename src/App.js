@@ -1,42 +1,64 @@
-//import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./Header.js";
 import Unity, { UnityContext } from "react-unity-webgl";
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 const unityContext = new UnityContext({
   // UnityLoaderとjsonを読み込ませる
-//  dataUrl: buildUrl + "/build.data",
-//  frameworkUrl: buildUrl + "/build.framework.js",
-//  codeUrl: buildUrl + "/build.wasm",
-  streamingAssetsUrl: "StreamingAssets",
-  companyName: "DefaultCompany",
-  productName: "Roll a Ball",
-  productVersion: "0.1",  
-  });
-  
-  const App = () => {
-    return <Unity unityContext={unityContext} />;
-  };
-  
+  loaderUrl: "Build/build.loader.js",
+  dataUrl: "Build/build.data",
+  frameworkUrl: "Build/build.framework.js",
+  codeUrl: "Build/build.wasm",
+});
+
+unityContext.on("debug", (message) => {
+  console.log(message);
+});
+
+function MoverightButton() {
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        console.log("右へ");
+        unityContext.send("Sphere", "MoveRight", 1);
+      }}
+    >
+      右へ
+    </button>
+  );
+}
+function MoveleftButton() {
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        console.log("左へ");
+        unityContext.send("Sphere", "MoveLeft", -1);
+      }}
+    >
+      左へ
+    </button>
+  );
+}
+
+const App = () => {
+  return (
+    <div>
+      <Header />
+      <MoverightButton />
+      <MoveleftButton />
+      <br />
+      <Unity
+        unityContext={unityContext}
+        style={{
+          height: "100%",
+          width: 950,
+          border: "2px solid black",
+          background: "grey",
+        }}
+      />
+    </div>
+  );
+};
 
 export default App;
